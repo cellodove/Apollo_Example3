@@ -4,32 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/launchListFragment">
-
     <fragment
         android:id="@+id/launchListFragment"
         android:name="com.cellodove.apollo_example.view.LaunchListFragment"
         tools:layout="@layout/launch_list_fragment">
-        <action
-            android:id="@+id/openLaunchDetails"
-            app:destination="@id/launch_details_fragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/launch_details_fragment"
-        android:name="com.cellodove.apollo_example.view.LaunchDetailsFragment"
-        tools:layout="@layout/launch_details_fragment">
-        <argument
-            android:name="launchId"
-            app:argType="string" />
-
-        <action
-            android:id="@+id/open_login"
-            app:destination="@id/login_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/login_fragment"
-        android:name="com.cellodove.apollo_example.view.LoginFragment"
-        tools:layout="@layout/login_fragment" />
-
 </navigation>
