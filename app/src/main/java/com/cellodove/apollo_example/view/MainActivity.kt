@@ -1,10 +1,12 @@
-package com.cellodove.apollo_example
+package com.cellodove.apollo_example.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.cellodove.apollo_example.LaunchListQuery
+import com.cellodove.apollo_example.viewmodel.MainViewModel
 import com.cellodove.apollo_example.databinding.ActivityMainBinding
 import com.cellodove.apollo_example.repository.Apollo
 
@@ -18,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        lifecycleScope.launchWhenResumed {
-            val response = Apollo.apolloClient().query(LaunchListQuery()).execute()
-            Log.e("LaunchList","Success ${response.data}")
-        }
+//        lifecycleScope.launchWhenResumed {
+//            val response = Apollo.apolloClient(this@MainActivity).query(LaunchListQuery()).execute()
+//            Log.e("LaunchList","Success ${response.data}")
+//        }
     }
 
 }
