@@ -21,11 +21,16 @@ class LaunchListAdapter(
     override fun getItemCount(): Int {
         return launches.size
     }
+    var onEndOfListReached: (() -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val launch = launches[position]
         holder.binding.site.text = launch.site ?: ""
         holder.binding.missionName.text = launch.mission?.name
         Glide.with(holder.itemView.context).load(launch.mission?.missionPatch).into(holder.binding.missionPatch)
+
+        if (position == launches.size - 1) {
+            onEndOfListReached?.invoke()
+        }
     }
 }
