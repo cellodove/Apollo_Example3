@@ -22,6 +22,7 @@ class LaunchListAdapter(
         return launches.size
     }
     var onEndOfListReached: (() -> Unit)? = null
+    var onItemClicked: ((LaunchListQuery.Launch) -> Unit)? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val launch = launches[position]
@@ -31,6 +32,10 @@ class LaunchListAdapter(
 
         if (position == launches.size - 1) {
             onEndOfListReached?.invoke()
+        }
+
+        holder.binding.root.setOnClickListener {
+            onItemClicked?.invoke(launch)
         }
     }
 }

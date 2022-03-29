@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.exception.ApolloException
 import com.cellodove.apollo_example.LaunchListQuery
@@ -54,6 +55,12 @@ class LaunchListFragment : Fragment() {
             }
             adapter.onEndOfListReached = null
             channel.close()
+        }
+
+        adapter.onItemClicked = { launch ->
+            findNavController().navigate(
+                LaunchListFragmentDirections.openLaunchDetails(launchId = launch.id)
+            )
         }
     }
 
