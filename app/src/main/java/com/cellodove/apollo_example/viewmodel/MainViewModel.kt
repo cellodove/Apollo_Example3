@@ -1,5 +1,6 @@
 package com.cellodove.apollo_example.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,9 +21,9 @@ class MainViewModel : ViewModel() {
 
     var errorLiveData = MutableLiveData<ApolloException>()
 
-    fun getLaunchListQuery(cursor:String?) = GlobalScope.launch{
+    fun getLaunchListQuery(cursor:String?,context: Context) = GlobalScope.launch{
         try {
-            launchListQueryData.postValue(Apollo.apolloClient().query(LaunchListQuery(Optional.Present(cursor))).execute())
+            launchListQueryData.postValue(Apollo.apolloClient(context).query(LaunchListQuery(Optional.Present(cursor))).execute())
         }catch (e: ApolloException){
             errorLiveData.postValue(e)
             Log.e("LaunchList", "Failure", e)
@@ -30,9 +31,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getLaunchDetailQuery(id:String) = GlobalScope.launch{
+    fun getLaunchDetailQuery(id:String,context: Context) = GlobalScope.launch{
         try {
-            launchDetailQueryData.postValue(Apollo.apolloClient().query(LaunchDetailsQuery(id)).execute())
+            launchDetailQueryData.postValue(Apollo.apolloClient(context).query(LaunchDetailsQuery(id)).execute())
         }catch (e: ApolloException){
             errorLiveData.postValue(e)
             Log.e("LaunchDetail", "Failure", e)
@@ -40,9 +41,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun loginMutation(email:String) = GlobalScope.launch{
+    fun loginMutation(email:String,context: Context) = GlobalScope.launch{
         try {
-            loginMutationToken.postValue(Apollo.apolloClient().mutation(LoginMutation(email = email)).execute())
+            loginMutationToken.postValue(Apollo.apolloClient(context).mutation(LoginMutation(email = email)).execute())
         }catch (e: ApolloException){
             errorLiveData.postValue(e)
             Log.e("LoginMutation", "Failure", e)

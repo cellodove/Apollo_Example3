@@ -40,7 +40,7 @@ class LaunchDetailsFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
             binding.error.visibility = View.GONE
 
-            viewModel.getLaunchDetailQuery(args.launchId)
+            viewModel.getLaunchDetailQuery(args.launchId,requireContext())
         }
 
     }

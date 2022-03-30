@@ -36,7 +36,7 @@ class LoginFragment : Fragment() {
             }
             binding.submitProgressBar.visibility = View.VISIBLE
             binding.submit.visibility = View.GONE
-            viewModel.loginMutation(email)
+            viewModel.loginMutation(email,requireContext())
         }
         viewModelObserver()
     }

@@ -46,12 +46,12 @@ class LaunchListFragment : Fragment() {
         adapter.onEndOfListReached = {
             channel.trySend(Unit)
         }
-        viewModel.getLaunchListQuery(cursor)
+        viewModel.getLaunchListQuery(cursor,requireContext())
 
         lifecycleScope.launchWhenResumed {
             for (item in channel) {
                 binding.showProgress.visibility = View.VISIBLE
-                viewModel.getLaunchListQuery(cursor)
+                viewModel.getLaunchListQuery(cursor,requireContext())
             }
             adapter.onEndOfListReached = null
             channel.close()
