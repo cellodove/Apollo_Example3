@@ -26,7 +26,6 @@ object Apollo {
             val request = chain.request().newBuilder()
                 .addHeader("Authorization", User.getToken(context) ?: "")
                 .build()
-
             return chain.proceed(request)
         }
     }
