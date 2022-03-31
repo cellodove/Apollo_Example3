@@ -60,7 +60,7 @@ class LaunchDetailsFragment : Fragment() {
                 configureButton(response.data!!.launch!!.isBooked)
             }
         }
-        viewModel.errorLiveData.observe(viewLifecycleOwner){ e ->
+        viewModel.errorLiveData.observe(viewLifecycleOwner){
             binding.progressBar.visibility = View.GONE
             binding.error.text = "Oh no... A protocol error happened"
             binding.error.visibility = View.VISIBLE
@@ -83,6 +83,38 @@ class LaunchDetailsFragment : Fragment() {
                 )
                 return@setOnClickListener
             }
+
+            binding.bookButton.visibility = View.INVISIBLE
+            binding.bookProgressBar.visibility = View.VISIBLE
+
+            if (isBooked){
+                viewModel.cancelTripMutation(id = args.launchId, context = requireContext())
+            }else{
+                viewModel.bookTripMutation(id = args.launchId, context = requireContext())
+            }
+
+
+            viewModel.bookTripMutationData.observe(viewLifecycleOwner){ response ->
+                if (response.hasErrors()){
+                    configureButton(isBooked)
+                    return@observe
+                }
+                configureButton(!isBooked)
+
+            }
+            viewModel.cancelTripMutationData.observe(viewLifecycleOwner){ response ->
+                if (response.hasErrors()){
+                    configureButton(isBooked)
+                    return@observe
+                }
+                configureButton(!isBooked)
+            }
+            viewModel.mutationErrorLiveData.observe(viewLifecycleOwner){
+                configureButton(isBooked)
+            }
+
+
+
         }
     }
 }
