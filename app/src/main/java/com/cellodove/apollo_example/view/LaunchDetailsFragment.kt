@@ -19,7 +19,7 @@ import com.cellodove.apollo_example.viewmodel.MainViewModel
 class LaunchDetailsFragment : Fragment() {
     private lateinit var binding: LaunchDetailsFragmentBinding
     private val viewModel : MainViewModel by activityViewModels()
-    val args: LaunchDetailsFragmentArgs by navArgs()
+    private val args: LaunchDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +42,6 @@ class LaunchDetailsFragment : Fragment() {
 
             viewModel.getLaunchDetailQuery(args.launchId,requireContext())
         }
-
     }
 
     private fun viewModelObserver(){
@@ -93,7 +92,6 @@ class LaunchDetailsFragment : Fragment() {
                 viewModel.bookTripMutation(id = args.launchId, context = requireContext())
             }
 
-
             viewModel.bookTripMutationData.observe(viewLifecycleOwner){ response ->
                 if (response.hasErrors()){
                     configureButton(isBooked)
@@ -112,9 +110,6 @@ class LaunchDetailsFragment : Fragment() {
             viewModel.mutationErrorLiveData.observe(viewLifecycleOwner){
                 configureButton(isBooked)
             }
-
-
-
         }
     }
 }
